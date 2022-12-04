@@ -7,6 +7,7 @@
 {
   imports =
     [ 
+	/etc/nixos/hardware-configuration.nix
 	<home-manager/nixos>
     ];
 
@@ -63,6 +64,7 @@
   	extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   	packages = with pkgs; [
 	vim
+	git
 	openssh
 	sudo
 	zsh
@@ -70,7 +72,7 @@
 	home-manager
   ];
   };
-  users.users.jherndon.shell = pkgs.zsh;
+  #users.users.jherndon.shell = pkgs.zsh;
 
   home-manager.users.jherndon = {
 
