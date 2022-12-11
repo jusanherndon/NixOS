@@ -71,8 +71,26 @@
         oh-my-zsh
 	pulseaudio
 	home-manager
+  
   ];
   };
+
+  environment.variables = { EDITOR = "vim";};
+  environment.systemPackages = with pkgs; [
+    ( 
+      with import <nixpkgs> {}; 
+      vim_configurable.customize {
+
+        name = "vim";
+        vimrcConfig.plug.plugins = with pkgs.vimPlugins; [fzf vim-surround];
+        vimrcConfig.customRC = ''
+         set number
+         set nocompatible
+         filetype off
+         '';
+      }
+    )   
+  ];
 
   programs = {
 
@@ -86,8 +104,7 @@
       #'';
     };
 
-  };
-
+};
 
 
 
