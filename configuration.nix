@@ -92,40 +92,28 @@
     )   
   ];
 
-  programs = {
-
-    zsh = {
+  home-manager.users.jherndon = {pkgs, ...}: {
+    home.stateVersion = "22.11";
+    programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
-      ohMyZsh.enable = true;
+      #ohMyZsh.enable = true;
       
       #initExtra = ''
       #  bindkey '^R' history-incrimental-search-backwards 
       #'';
     };
-
+    
+    programs.git = {
+      enable = true;
+      userName = "Justin Herndon";
+      userEmail = "jherndon111@gmail.com";
+    };
 };
 
 
 
   #users.users.jherndon.shell = pkgs.zsh;
-  #home-manager.users.jherndon = {
-
-  # home.stateVersion = "22.11";
-  # programs.zsh = {
-
-  #   enable = true;    
- 
-  #   ohMyZsh = {
-  #     enable = true;
-  #     plugins = ["git" "zsh-autocomplete"];
-  #   }; 
-  #   initExtra = ''
-  #   bindkey -v
-  #   bindkey '^R' history-incrimental-search-backwards 
-  # '';
-  # };
-  #}; 
 
 
   # List packages installed in system profile. To search, run:
