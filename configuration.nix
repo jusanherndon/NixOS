@@ -97,8 +97,12 @@
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
-      #ohMyZsh.enable = true;
-      
+      oh-my-zsh.enable = true;
+            
+      oh-my-zsh = {
+        plugins = ["git"];
+      };
+ 
       initExtra = ''
         bindkey '^R' history-incrimental-search-backwards 
       '';
