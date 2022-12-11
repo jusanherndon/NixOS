@@ -2,14 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ 
-	/etc/nixos/hardware-configuration.nix
-	<home-manager/nixos>
-    ];
+  imports =  
+  [
+    (import "${builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz"}/nixos")
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -68,23 +68,47 @@
 	openssh
 	sudo
 	zsh
+        oh-my-zsh
 	pulseaudio
 	home-manager
   ];
   };
+
+  programs = {
+
+    zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      ohMyZsh.enable = true;
+      
+      #initExtra = ''
+      #  bindkey '^R' history-incrimental-search-backwards 
+      #'';
+    };
+
+  };
+
+
+
+
   #users.users.jherndon.shell = pkgs.zsh;
+  #home-manager.users.jherndon = {
 
-  home-manager.users.jherndon = {
+  # home.stateVersion = "22.11";
+  # programs.zsh = {
 
-   home.stateVersion = "22.11";
-   programs.zsh = {
-  
-     initExtra = ''
-     bindkey -v
-     bindkey '^R' history-incrimental-search-backwards 
-   '';
-   };
-  }; 
+  #   enable = true;    
+ 
+  #   ohMyZsh = {
+  #     enable = true;
+  #     plugins = ["git" "zsh-autocomplete"];
+  #   }; 
+  #   initExtra = ''
+  #   bindkey -v
+  #   bindkey '^R' history-incrimental-search-backwards 
+  # '';
+  # };
+  #}; 
 
 
   # List packages installed in system profile. To search, run:
