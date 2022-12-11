@@ -99,9 +99,9 @@
       enableAutosuggestions = true;
       #ohMyZsh.enable = true;
       
-      #initExtra = ''
-      #  bindkey '^R' history-incrimental-search-backwards 
-      #'';
+      initExtra = ''
+        bindkey '^R' history-incrimental-search-backwards 
+      '';
     };
     
     programs.git = {
