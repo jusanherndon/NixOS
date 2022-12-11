@@ -76,24 +76,10 @@
   };
 
   environment.variables = { EDITOR = "vim";};
-  environment.systemPackages = with pkgs; [
-    ( 
-      with import <nixpkgs> {}; 
-      vim_configurable.customize {
-
-        name = "vim";
-        vimrcConfig.plug.plugins = with pkgs.vimPlugins; [fzf vim-surround];
-        vimrcConfig.customRC = ''
-         set number
-         set nocompatible
-         filetype off
-         '';
-      }
-    )   
-  ];
 
   home-manager.users.jherndon = {pkgs, ...}: {
     home.stateVersion = "22.11";
+
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -107,6 +93,16 @@
         bindkey '^R' history-incrimental-search-backwards 
       '';
     };
+
+    programs.vim = {
+      enable = true;
+      plugins = with pkgs.vimPlugins; [vim-surround nerdtree];
+      extraConfig = ''
+        set number
+        set nocompatible
+        filetype off
+      '';    
+    };
     
     programs.git = {
       enable = true;
@@ -114,8 +110,6 @@
       userEmail = "jherndon111@gmail.com";
     };
 };
-
-
 
   #users.users.jherndon.shell = pkgs.zsh;
 
